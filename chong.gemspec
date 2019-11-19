@@ -8,6 +8,6 @@ Gem::Specification.new do |s|
   s.authors     = ["Wei Jiang"]
   s.email       = 'anotherjiang@qq.com'
   s.files       = ["lib/chong.rb", "lib/chong/dsl.rb", "lib/chong/link_parser.rb"]
-  s.homepage    = 'https://rubygems.org/gems/chong'
+  s.homepage    = 'https://github.com/jiangwei909/chong'
   s.license     = 'MIT'
 end
