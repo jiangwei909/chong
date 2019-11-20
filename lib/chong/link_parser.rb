@@ -38,10 +38,14 @@ def extract_links(base_url, options = {})
 
         next if options[:history].include?(next_href)
 
-        options[:queue] << next_href
-        options[:history] << next_href
+        # handle link
+        options[:queue] << next_href if next_href =~ options[:pattern] 
 
-        extract_links next_href, options if options[:recursive]
+        # recursive
+        if next_href =~ options[:recursive_pattern]
+          options[:history] << next_href
+          extract_links next_href, options if options[:recursive]
+        end
       end
     end
   rescue OpenURI::HTTPError => ex
