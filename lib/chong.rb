@@ -22,7 +22,10 @@ class Chong
       end
 
       productor = Thread.new do
-        extract_links host[:url], url_queue, []
+        url_queue << host[:url]
+        if host[:options][:recursive]
+          extract_links host[:url], :queue=>url_queue, :history=>[], :recursive=>host[:options][:recursive]
+        end
         url_queue << "end"
       end
 

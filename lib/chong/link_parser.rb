@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'openssl'
 
-def extract_links(base_url, queue, history)
+def extract_links(base_url, options = {})
   begin
     # puts "base url = #{base_url}"
     base = URI.parse(base_url)
@@ -36,12 +36,12 @@ def extract_links(base_url, queue, history)
 
         next_href = href.to_s
 
-        next if history.include?(next_href)
+        next if options[:history].include?(next_href)
 
-        queue << next_href
-        history << next_href
+        options[:queue] << next_href
+        options[:history] << next_href
 
-        extract_links next_href, queue, history
+        extract_links next_href, options if options[:recursive]
       end
     end
   rescue OpenURI::HTTPError => ex
