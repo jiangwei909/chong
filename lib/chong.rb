@@ -13,7 +13,7 @@ class Chong
         while link != "end"
           begin
             doc = Nokogiri::HTML(open(link, {ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}))
-            host[:handle].call doc
+            host[:handle].call link, doc
           rescue OpenURI::HTTPError => ex
             # puts ex.to_s
           end
